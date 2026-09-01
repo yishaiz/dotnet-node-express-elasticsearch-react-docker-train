@@ -10,7 +10,7 @@ import './MainScreen.css';
 
 export default function MainScreen({ onProceedToCheckout }) {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(1);
+  const [quantities, setQuantities] = useState({});
   const { categories, selectedCategory, products, loading, error } = useSelector(
     (state) => state.categories
   );
@@ -26,10 +26,11 @@ export default function MainScreen({ onProceedToCheckout }) {
     if (categoryId) {
       dispatch(fetchProductsByCategory(categoryId));
     }
-    setQuantity(1);
+    setQuantities({});
   };
 
   const handleAddToCart = (product) => {
+    const quantity = quantities[product.id] || 1;
     dispatch(
       addToCart({
         id: product.id,
@@ -38,7 +39,7 @@ export default function MainScreen({ onProceedToCheckout }) {
         quantity: parseInt(quantity),
       })
     );
-    setQuantity(1);
+    setQuantities((prev) => ({ ...prev, [product.id]: 1 }));
   };
 
   const handleRemoveFromCart = (productId) => {
@@ -98,7 +99,12 @@ export default function MainScreen({ onProceedToCheckout }) {
                       <div className="product-actions">
                         <div className="quantity-control">
                           <button
-                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                            onClick={() =>
+                              setQuantities((prev) => ({
+                                ...prev,
+                                [product.id]: Math.max(1, (prev[product.id] || 1) - 1),
+                              }))
+                            }
                             className="qty-btn"
                           >
                             −
@@ -106,12 +112,22 @@ export default function MainScreen({ onProceedToCheckout }) {
                           <input
                             type="number"
                             min="1"
-                            value={quantity}
-                            onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                            value={quantities[product.id] || 1}
+                            onChange={(e) =>
+                              setQuantities((prev) => ({
+                                ...prev,
+                                [product.id]: parseInt(e.target.value) || 1,
+                              }))
+                            }
                             className="qty-input"
                           />
                           <button
-                            onClick={() => setQuantity(quantity + 1)}
+                            onClick={() =>
+                              setQuantities((prev) => ({
+                                ...prev,
+                                [product.id]: (prev[product.id] || 1) + 1,
+                              }))
+                            }
                             className="qty-btn"
                           >
                             +

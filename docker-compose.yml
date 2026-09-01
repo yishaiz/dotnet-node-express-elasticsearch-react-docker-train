@@ -41,6 +41,23 @@ services:
     networks:
       - dev-network
 
+  backend:
+    build:
+      context: ./backend-dotnet
+      dockerfile: Dockerfile
+    container_name: backend-dotnet
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=ShopDb;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True"
+    ports:
+      - "5239:8080"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - dev-network
+
   kibana:
     image: docker.elastic.co/kibana/kibana:8.11.0
     container_name: kibana

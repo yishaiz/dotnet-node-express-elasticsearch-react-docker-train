@@ -67,7 +67,7 @@ export default function OrderSummary({ onBackToMain }) {
         })),
       };
 
-      await axios.post('http://localhost:3000/api/orders', orderData);
+      await axios.post('/api/orders', orderData);
 
       setSuccess(true);
       setFormData({ customerName: '', address: '', email: '' });

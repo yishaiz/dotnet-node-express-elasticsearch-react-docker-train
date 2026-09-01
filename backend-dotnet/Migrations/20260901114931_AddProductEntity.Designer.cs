@@ -113,13 +113,13 @@ namespace backend_dotnet.Migrations
                         {
                             Id = 5,
                             CategoryId = 1,
-                            Name = "קרם חמוא"
+                            Name = "שוקו"
                         },
                         new
                         {
                             Id = 6,
                             CategoryId = 1,
-                            Name = "בחמיץ"
+                            Name = "חמאה"
                         },
                         new
                         {

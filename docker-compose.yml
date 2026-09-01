@@ -71,6 +71,20 @@ services:
     networks:
       - dev-network
 
+  client:
+    build:
+      context: ./client-react
+      dockerfile: Dockerfile
+    container_name: client-react
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - dev-network
+    environment:
+      VITE_API_URL: "http://backend:8080/api"
+
 networks:
   dev-network:
     driver: bridge

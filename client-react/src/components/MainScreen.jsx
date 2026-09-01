@@ -8,7 +8,7 @@ import {
 import { addToCart, removeFromCart, updateQuantity } from '../store/cartSlice';
 import './MainScreen.css';
 
-export default function MainScreen() {
+export default function MainScreen({ onProceedToCheckout }) {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const { categories, selectedCategory, products, loading, error } = useSelector(
@@ -175,7 +175,13 @@ export default function MainScreen() {
                   </li>
                 ))}
               </ul>
-              <button className="checkout-btn">המשך להזמנה</button>
+              <button
+                className="checkout-btn"
+                onClick={onProceedToCheckout}
+                disabled={cartItems.length === 0}
+              >
+                המשך להזמנה
+              </button>
             </div>
           ) : (
             <p className="empty-cart">הסל ריק</p>

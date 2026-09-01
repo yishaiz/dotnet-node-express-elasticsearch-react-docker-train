@@ -46,7 +46,9 @@ export default function MainScreen() {
   };
 
   const handleUpdateQuantity = (productId, newQuantity) => {
-    if (newQuantity > 0) {
+    if (newQuantity <= 0) {
+      dispatch(removeFromCart(productId));
+    } else {
       dispatch(updateQuantity({ id: productId, quantity: newQuantity }));
     }
   };

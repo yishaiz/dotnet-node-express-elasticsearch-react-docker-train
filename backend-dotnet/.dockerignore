@@ -3,3 +3,11 @@ obj/
 **/bin/
 **/obj/
 .vs/
+.vscode/
+.git/
+.gitignore
+.dockerignore
+*.user
+*.log
+.DS_Store
+Thumbs.db

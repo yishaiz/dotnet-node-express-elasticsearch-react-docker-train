@@ -58,6 +58,22 @@ services:
     networks:
       - dev-network
 
+  backend-orders:
+    build:
+      context: ./backend-node
+      dockerfile: Dockerfile
+    container_name: backend-node
+    environment:
+      PORT: "3000"
+      ELASTICSEARCH_URL: "http://elasticsearch:9200"
+    ports:
+      - "3000:3000"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - dev-network
+
   kibana:
     image: docker.elastic.co/kibana/kibana:8.11.0
     container_name: kibana

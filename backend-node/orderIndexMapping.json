@@ -1,0 +1,41 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "properties": {
+      "customerName": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "address": {
+        "type": "text"
+      },
+      "email": {
+        "type": "keyword"
+      },
+      "items": {
+        "type": "nested",
+        "properties": {
+          "productId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "text"
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        }
+      },
+      "createdAt": {
+        "type": "date"
+      }
+    }
+  }
+}

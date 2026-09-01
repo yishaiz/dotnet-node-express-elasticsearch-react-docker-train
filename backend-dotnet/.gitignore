@@ -1,0 +1,35 @@
+# Build results
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# User-specific files
+*.user
+*.userprefs
+*.suo
+
+# IDE
+.vs/
+.vscode/
+*.code-workspace
+
+# Build and runtime artifacts
+*.log
+*.tmp
+*.cache
+
+# Dependencies
+packages/
+.nuget/
+
+# Environment and config
+appsettings.Development.json
+appsettings.local.json
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
